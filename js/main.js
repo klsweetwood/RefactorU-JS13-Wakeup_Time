@@ -1,22 +1,47 @@
 $(document).on('ready', function() {
-	// CREATE VARIABLES AND DIVS
-	var outerShell = $("<div id='outer-shell'></div>");
-	var innerShell = $("<div id='inner-shell'></div>");
-	var leftAmPmLabels = $("<div id='left-labels'>PM<br><br>Auto</div>");
 
+// MAKE CLOCK FUNCTION
+//TODO: allow switch between 24/12 hour displays
+	var updateClock = function () {
+		var date = new Date();
+		var hours = date.getHours();
+		var minutes = date.getMinutes();
+		minutes < 10 ? minutes = '0' + minutes: minutes;
+
+		// Display PM indicator if after noon.
+		if (hours < 12) {
+			amPmIndicator.css('display', 'none');
+		}
+
+		// Update clock display
+		var time = hours + ':' + minutes;
+		clockText.text(time);
+	}
+
+	setInterval(updateClock, 1000);
+
+
+
+
+// CREATE VARIABLES AND DIVS
+	var outerShell = $("<div>");
+	var innerShell = $("<div>");
+	var leftAmPmLabels = $("<div id='left-labels'>PM<br><br>Auto</div>");
+//TODO: fix AM/FM labels and add ability to move indicator
 	var freqTable = $("<table id='freq-table'></table>");
-	var amFreqLabel = $("<tr><td id='AM-Label'>AM</td></tr>");
-	var fmFreqLabel = $("<tr><td id='FM-Label'>FM</td></tr>");
+	var amFreqLabel = $("<tr><td>AM</td></tr>");
+	var fmFreqLabel = $("<tr><td>FM</td></tr>");
 	var amFreq = $("<td>53</td> <td>60</td> <td>70</td> <td>90 110</td> <td>140 170</td>");
 	var fmFreq = $("<td>88 92 96 102 106 108</td>");
 	
-	var clockScreen = $("<div id='clock-screen'>10:00</div>");
-	var amPmIndicator = $("<div id='AM-PM-indicator'></div>");
-	var autoIndicator = $("<div id='auto-indicator'></div>");
-	var freqBar = $("<div id='freq-bar'></div>");
-	var freqIndicator = $("<div id='freq-indicator'></div>");
+	var clockScreen = $("<div>");
+	var clockText = $("<span>")
+	var amPmIndicator = $("<div>");
+	var autoIndicator = $("<div>");
+	var freqBar = $("<div>");
+	var freqIndicator = $("<div>");
 	var clockHeight = '250px';
-	var clockWidth = '50%';
+	var clockWidth = '500px';
 	
 	// Container
 	$('.container').append(outerShell);
@@ -31,6 +56,7 @@ $(document).on('ready', function() {
 	freqBar.append(freqIndicator);
 
 	// Clock Screen
+	clockScreen.append(clockText);
 	clockScreen.append(amPmIndicator);
 	clockScreen.append(autoIndicator);
 	clockScreen.append(leftAmPmLabels);
@@ -43,7 +69,7 @@ $(document).on('ready', function() {
 
 
 
-	// STYLING
+// STYLING
 	// Outer Shell
 	outerShell
 	.height(clockHeight)
@@ -133,6 +159,10 @@ $(document).on('ready', function() {
 	.height('100%')
 	.css('background-color','#F00');
 	
+
+
+
+
 
 
 
