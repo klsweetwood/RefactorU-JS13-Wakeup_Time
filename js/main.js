@@ -27,16 +27,22 @@ $(document).on('ready', function() {
 	var outerShell = $("<div>");
 	var innerShell = $("<div>");
 	var leftAmPmLabels = $("<div id='left-labels'>PM<br><br>Auto</div>");
-//TODO: fix AM/FM labels and add ability to move indicator
-	var freqTable = $("<table id='freq-table'></table>");
-	var amFreqLabel = $("<tr><td>AM</td></tr>");
-	var fmFreqLabel = $("<tr><td>FM</td></tr>");
-	var amFreq = $("<td>53</td> <td>60</td> <td>70</td> <td>90 110</td> <td>140 170</td>");
-	var fmFreq = $("<td>88 92 96 102 106 108</td>");
+
+
+
+
+
+
+	var freqContainer = $("<div>");
+
+	var freqLabel = $("<div>AM<br>FM</div>");
+	var leftFreq = $("<div>53 60 70<br>88 92 96</div>");
+	var rightFreq = $("<div>90 110 140 170<br> 102 106 108</div>");
 	
 	var clockScreen = $("<div>");
 	var clockText = $("<span>")
 	var amPmIndicator = $("<div>");
+//TODO: allow Auto to be clickable
 	var autoIndicator = $("<div>");
 	var freqBar = $("<div>");
 	var freqIndicator = $("<div>");
@@ -51,7 +57,7 @@ $(document).on('ready', function() {
 	
 	// Inner Shell
 	innerShell.append(clockScreen);
-	innerShell.append(freqTable);
+	innerShell.append(freqContainer);
 	innerShell.append(freqBar);
 	freqBar.append(freqIndicator);
 
@@ -62,10 +68,36 @@ $(document).on('ready', function() {
 	clockScreen.append(leftAmPmLabels);
 
 	// Frequency Table
-	freqTable.append(amFreqLabel);
-	freqTable.append(fmFreqLabel);
-	amFreqLabel.append(amFreq);
-	fmFreqLabel.append(fmFreq);
+	freqContainer.append(freqLabel);
+	freqContainer.append(leftFreq);
+	freqContainer.append(rightFreq);
+
+//TODO: make function to 
+	// var amFrequencies = [53, 60, 70, 90, 110, 140, 170];
+	// var fmFrequencies = [88, 92, 96, 102, 106, 108];
+
+	// var createFreqDiv = function(frequency, leftMargin) {
+	// 	var freqDiv = $('<div>' + frequency + '</div>');
+	// 	freqDiv
+	// 	.css('margin-left', leftMargin/3 + 'px')
+	// 	.css('float','left')
+	// 	.css('font-size','12px')
+	// 	.css('color','#FFF');
+	// 	return freqDiv;
+	// };
+
+	// var freqMargins = function(freqArr) {
+	// 	for (var i = 1; i < freqArr.length; i++) {
+	// 		var getMargin = (freqArr[i]-freqArr[i-1]);
+	// 		console.log(getMargin);
+	// 		freqContainer.append(createFreqDiv(freqArr[i],getMargin));
+	// 	}
+	// };
+
+	// freqMargins(amFrequencies);
+	// freqMargins(fmFrequencies);
+
+
 
 
 
@@ -119,14 +151,20 @@ $(document).on('ready', function() {
 	.css('color','#FFF')
 	.css('line-height', clockScreen.height()/55);
 
-	freqTable
+	freqContainer
 	.css('font-size','12px')
-	.css('margin','0 15%')
+	.css('margin','0 18%')
 	.css('text-align','left');
 
-	// $('#AM-Label')
-	// .css('padding-right','25%')
-	// .width('5%');
+	freqLabel
+	.css('display','inline-block')
+	.css('margin-right','7%');
+	leftFreq
+	.css('display','inline-block')
+	.css('margin','0 6%');
+	rightFreq
+	.css('display','inline-block');
+
 
 
 	// Indicators
